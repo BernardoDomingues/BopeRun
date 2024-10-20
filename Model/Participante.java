@@ -2,12 +2,14 @@ package Model;
 
 public class Participante {
   private String nome;
-  private String numero;
+  private static int numeroContador = 1;
+  private int numero;
   private String cidadeOrigem;
 
-  Participante(String nome, String numero, String cidadeOrigem) {
+  Participante(String nome, int numero, String cidadeOrigem) {
     this.nome = nome;
-    this.numero = numero;
+    this.numero = numeroContador;
     this.cidadeOrigem = cidadeOrigem;
+    numeroContador++;
   }
 }

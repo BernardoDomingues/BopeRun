@@ -4,7 +4,7 @@ public class Ciclista extends Participante {
   private Etapa[] etapas = new Etapa[20];
   private int etapasRealizadas = -1;
 
-  Ciclista(String nome, String numero, String cidadeOrigem) {
+  Ciclista(String nome, int numero, String cidadeOrigem) {
     super(nome, numero, cidadeOrigem);
   }
 
