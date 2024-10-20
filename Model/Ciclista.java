@@ -24,20 +24,6 @@ public class Ciclista extends Participante {
     return new Duracao(new Hora(0, 0, 0), somaTotal);
   }
 
-  public Hora isMelhorTempo(Ciclista outro) throws Exception {
-    validaEtapas(outro);
-
-    if (this.getDuracaoTotal().duracaoEmSegundos() > outro.getDuracaoTotal().duracaoEmSegundos()) {
-      return new Hora(0, 0, this.getDuracaoTotal().duracaoEmSegundos());
-    }
-
-    if (this.getDuracaoTotal().duracaoEmSegundos() < outro.getDuracaoTotal().duracaoEmSegundos()) {
-      return new Hora(0, 0, outro.getDuracaoTotal().duracaoEmSegundos());
-    }
-
-    return null;
-  }
-
   public Ciclista isMelhor(Ciclista outro) throws Exception {
     validaEtapas(outro);
 
@@ -50,6 +36,16 @@ public class Ciclista extends Participante {
     }
 
     return null;
+  }
+
+  public Hora isMelhorTempo(Ciclista outro) throws Exception {
+    validaEtapas(outro);
+
+    Ciclista melhor = isMelhor(outro);
+
+    if (melhor == null) return null;
+    
+    return new Hora(0, 0, melhor.getDuracaoTotal().duracaoEmSegundos());
   }
 
   public Ciclista isMelhor(Ciclista outro, int idEtapa) throws Exception {
