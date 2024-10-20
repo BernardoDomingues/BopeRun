@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalTime;
-
 public class Ciclista extends Participante {
   private Etapa[] etapas = new Etapa[20];
   private int etapasRealizadas = -1;
@@ -20,21 +18,21 @@ public class Ciclista extends Participante {
     int somaTotal = 0;
 
     for (int i = 0; i <= etapasRealizadas; i++) {
-      somaTotal += etapas[i].getDuracao().getDuracaoEmSegundos();
+      somaTotal += etapas[i].getDuracao().duracaoEmSegundos();
     }
 
-    return new Duracao(LocalTime.of(0, 0, somaTotal));
+    return new Duracao(new Hora(0, 0, 0), somaTotal);
   }
 
-  public LocalTime isMelhorTempo(Ciclista outro) throws Exception {
+  public Hora isMelhorTempo(Ciclista outro) throws Exception {
     validaEtapas(outro);
 
-    if (this.getDuracaoTotal().getDuracaoEmSegundos() > outro.getDuracaoTotal().getDuracaoEmSegundos()) {
-      return LocalTime.of(0, 0, this.getDuracaoTotal().getDuracaoEmSegundos());
+    if (this.getDuracaoTotal().duracaoEmSegundos() > outro.getDuracaoTotal().duracaoEmSegundos()) {
+      return new Hora(0, 0, this.getDuracaoTotal().duracaoEmSegundos());
     }
 
-    if (this.getDuracaoTotal().getDuracaoEmSegundos() < outro.getDuracaoTotal().getDuracaoEmSegundos()) {
-      return LocalTime.of(0, 0, outro.getDuracaoTotal().getDuracaoEmSegundos());
+    if (this.getDuracaoTotal().duracaoEmSegundos() < outro.getDuracaoTotal().duracaoEmSegundos()) {
+      return new Hora(0, 0, outro.getDuracaoTotal().duracaoEmSegundos());
     }
 
     return null;
@@ -43,11 +41,11 @@ public class Ciclista extends Participante {
   public Ciclista isMelhor(Ciclista outro) throws Exception {
     validaEtapas(outro);
 
-    if (this.getDuracaoTotal().getDuracaoEmSegundos() > outro.getDuracaoTotal().getDuracaoEmSegundos()) {
+    if (this.getDuracaoTotal().duracaoEmSegundos() > outro.getDuracaoTotal().duracaoEmSegundos()) {
       return this;
     }
 
-    if (this.getDuracaoTotal().getDuracaoEmSegundos() < outro.getDuracaoTotal().getDuracaoEmSegundos()) {
+    if (this.getDuracaoTotal().duracaoEmSegundos() < outro.getDuracaoTotal().duracaoEmSegundos()) {
       return outro;
     }
 
@@ -57,22 +55,14 @@ public class Ciclista extends Participante {
   public Ciclista isMelhor(Ciclista outro, int idEtapa) throws Exception {
     validaEtapas(outro);
 
-    if (this.etapas[idEtapa].getDuracao().getDuracaoEmSegundos() > outro.etapas[idEtapa].getDuracao().getDuracaoEmSegundos()) {
+    if (this.etapas[idEtapa].getDuracao().duracaoEmSegundos() > outro.etapas[idEtapa].getDuracao().duracaoEmSegundos()) {
       return this;
     }
 
-    if (this.etapas[idEtapa].getDuracao().getDuracaoEmSegundos() < outro.etapas[idEtapa].getDuracao().getDuracaoEmSegundos()) {
+    if (this.etapas[idEtapa].getDuracao().duracaoEmSegundos() < outro.etapas[idEtapa].getDuracao().duracaoEmSegundos()) {
       return outro;
     }
 
     return null;
   }
 }
-
-/*
- * 
- * 
- * [CADASTRANDO] INPUT_USER -> VIEW -> CONTROLLER ->  BD
- * [LIST] SELECT_OPTION -> VIEW -> CONTROLLER -> BD -> CONTROLLR -> VIEW
- *  
- */

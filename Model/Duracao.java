@@ -1,24 +1,27 @@
 package Model;
 
-import java.time.LocalTime;
-
 public class Duracao {
-  private LocalTime duracao;
+  private Hora horaInicial;
+  private int duracaoTotal;
 
-  public Duracao(LocalTime duracao) {
-    this.duracao = duracao;
+  public Duracao(Hora horaInicial, int tempoEmSegundos) {
+      this.horaInicial = horaInicial;
+      this.duracaoTotal = tempoEmSegundos;
   }
 
-  public int getDuracaoEmSegundos() {
-    return duracao.getSecond();
+  public boolean maiorQue(Duracao outraDuracao) {
+      return this.duracaoTotal > outraDuracao.duracaoTotal;
   }
 
-  public int compararCom(Duracao outra) {
-    return Integer.compare(this.duracao.getSecond(), outra.duracao.getSecond());
+  public int duracaoEmSegundos() {
+      return duracaoTotal;
   }
 
-  @Override
-  public String toString() {
-    return duracao.toString();
+  public String relatorio() {
+      int horas = duracaoTotal / 3600;
+      int minutos = (duracaoTotal % 3600) / 60;
+      int segundos = duracaoTotal % 60;
+      return String.format("Duração: %02d horas, %02d minutos, %02d segundos", horas, minutos, segundos);
   }
 }
+
